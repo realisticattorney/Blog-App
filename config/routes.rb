@@ -1,3 +1,10 @@
+Rails.application.routes.draw do
+  root "articles#index"
+
+  get "/articles", to: "articles#index"
+end
+
+
 Rails.application.routes.draw do # this is calling the index action (def index) within  articles controller (a class I should define with its index action) FOR THAT GO TO CONTROLLERS/ARTICLES
   get "/articles", to: "articles#index"
 

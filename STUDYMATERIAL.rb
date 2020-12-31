@@ -3,7 +3,7 @@
 
 It looks at the HTTP verb (GET, POST, PUT, DELETE) 
 and the URL that is being requested 
-( "/posts",) in get "/posts"
+get "/posts"
 and matches it with the appropriate controller action to run.
 to: "posts#index" 
 
@@ -12,13 +12,8 @@ params
 # typing $ rails routes into the command line will give you an output of all the routes that are available to your application
 
 
-
-
-
-
-
 root to: "kittens#index" #kittens controller, index action (method)
-e.g. the index action ("#index") is just the .index method that’s defined in the KittensController (CLass)
+e.g. the index action ("#index") is just the .index method defined within KittensController (CLass)
 
 
 
@@ -31,8 +26,6 @@ post "/posts", to: "posts#create"  # usually a submitted form
 get "/posts/:id/edit", to: "posts#edit"
 put "/posts/:id", to: "posts#update" # usually a submitted form
 delete "/posts/:id", to: "posts#destroy"
-
-Each of these routes is basically a Ruby method that matches that particular URL ("/posts/") and HTTP verb (get, put, post) with the correct controller "posts#" action "index".
 
 
 # GET the page that lets you create a new post (aka view the “new” post page)
@@ -47,3 +40,21 @@ lets see an example from $ rails routes
 "name of the route"                     "http verb"                       "URL"                    "(just a thing to say doesnt need an .extension"
 new_rails_conductor_inbound_email_source GET    /rails/conductor/action_mailbox/inbound_emails/sources/new(.:format)                              rails/conductor/action_mailbox/inbound_emails/sources#new
 "then the controller"                               "and its action"
+
+
+
+30 dic
+
+so, this is a route to add at routes.rb
+
+Rails.application.routes.draw do
+   get "/articles", to: "articles#index"
+ 
+   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+ end
+
+ The route above declares that GET /articles requests are mapped to the index action of ArticlesController
+
+ "mapping" in programming means taking several things and then somehow associating each of them with another thing.
+ in this case taking /articles and associating each item in articles with index on ArticlesController
+   
