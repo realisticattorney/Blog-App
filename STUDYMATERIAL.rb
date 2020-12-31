@@ -135,4 +135,33 @@ Next, we will connect all of the pieces together.
 
 5.4 Showing a List of Articles
 
+class ArticlesController < ApplicationController
+   def index
+     @articles = Article.all
+   end
+ end
+ Controller instance variables can be accessed by the view. That means we can reference @articles in app/views/articles/index.html.erb. Let's open that file, and replace its contents with:
 
+ '
+ <h1>Articles</h1>
+
+<ul>
+  <% @articles.each do |article| %>
+    <li>
+      <%= article.title %>
+    </li>
+  <% end %>
+</ul>
+
+
+The above code is a mixture of HTML and ERB. ERB is a templating system that evaluates Ruby code embedded in a document. Here, we can see two types of ERB tags: <% %> and <%= %>. The <% %> tag means "evaluate the enclosed Ruby code." The <%= %> tag means "evaluate the enclosed Ruby code, and output the value it returns.
+
+so, if we visit the page localhost:3000
+
+The browser makes a request: GET http://localhost:3000.
+Our Rails application receives this request.
+The Rails router maps the root route to the index action of ArticlesController.
+The index action uses the Article model to fetch all articles in the database.
+Rails automatically renders the app/views/articles/index.html.erb view.
+The ERB code in the view is evaluated to output HTML.
+The server sends a response containing the HTML back to the browser.
