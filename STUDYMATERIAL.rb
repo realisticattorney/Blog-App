@@ -58,5 +58,23 @@ Rails.application.routes.draw do
  "mapping" in programming means taking several things and then somehow associating each of them with another thing.
  in this case taking /articles and associating each item in articles with index on ArticlesController
 
-   $ bin/rails generate controller Articles index --skip-routes #it creates the controller ArticlesController (convention over configuration)
-   
+   $ bin/rails generate controller Articles index --skip-routes #it creates the controller ArticlesController (convention over configuration) and a few folders and files more. Lets see the controller it created:
+
+   class ArticlesController < ApplicationController
+      def index
+      end
+    end
+
+    #the index action is empty. When an action does not explicitly render a view (or otherwise trigger an HTTP response), Rails will automatically render a view (that's a file) that matches the name of the controller and action (which will created for you). Convention Over Configuration! Views are located in the app/views directory. So the index action will render app/views/articles/index.html.erb
+
+    However, we need to map the root path to the appropiate controller and action we just created (which shows view file index, that I've changed for <h1>Hello, Rails<h1>)
+
+
+
+    generating a model
+
+    $ bin/rails generate model Article title:string body:text
+will create
+    (db/migrate/<timestamp>_create_articles.rb) and the model file (app/models/article.rb).
+
+    
