@@ -77,4 +77,62 @@ Rails.application.routes.draw do
 will create
     (db/migrate/<timestamp>_create_articles.rb) and the model file (app/models/article.rb).
 
+    (extract from db/migrate/time_stamp):'
+
+    class CreateArticles < ActiveRecord::Migration[6.1]
+      def change
+        create_table :articles do |t|
+          t.string :title
+          t.text :body
     
+          t.timestamps
+        end
+      end
+    end
+    
+'
+    The call to create_table specifies how the articles table should be constructed. By default, the create_table method adds an id column as an auto-incrementing primary key. So the first record in the table will have an id of 1, the next record will have an id of 2, and so on.
+
+    Inside the block for create_table, two columns are defined: title and body. These were added by the generator because we included them in our generate command (bin/rails generate model Article title:string body:text).
+
+   On the last line of the block is a call to t.timestamps. This method defines two additional columns named created_at and updated_at. As we will see, Rails will manage these for us, setting the values when we create or update a model object.
+
+
+   5.3 Using a Model to Interact with the Database
+now I turned the irb on console with bin/rails console
+and Im initializing a new  Article object 
+
+article = Article.new(title: "Hello Rails", body: "I am on Rails!")
+
+as irb is not part of the actual app (it s more like temporary) we saved it
+
+article.save
+'
+Article Create (0.4ms)  INSERT INTO "articles" ("title", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["title", "Hello Rails"], ["body", "I am on Rails!"], ["created_at", "2020-01-18 23:47:30.734416"], ["updated_at", "2020-01-18 23:47:30.734416"]]
+(0.9ms)  commit transaction
+=> true
+article.save
+'
+The above output shows an INSERT INTO "articles" ... database query. This indicates that the article has been inserted into our table. And if we take a look at the article object again, we see something interesting has happened:
+
+article
+=> #<Article id: 1, title: "Hello Rails", body: "I am on Rails!", created_at: "2020-01-18 23:47:30", updated_at: "2020-01-18 23:47:30">
+'
+# at this point, I dont get where the model generated, is connected to the object initialized. is due to the rooth path? Is it because the name Articles it's not understood as just a name, but one that it's already part of the convention so when you use Article is automatically gets it as part of that class. Or idk...
+
+
+Article.find(1)
+=> #<Article id: 1, title: "Hello Rails", body: "I am on Rails!", created_at: "2020-01-18 23:47:30", updated_at: "2020-01-18 23:47:30">
+#we see that of the class Article, object w id = 1 is stored
+
+# here a new method called all
+
+Article.all
+=> #<ActiveRecord::Relation [#<Article id: 1, title: "Hello Rails", body: "I am on Rails!", created_at: "2020-01-18 23:47:30", updated_at: "2020-01-18 23:47:30">]>
+
+#looks like an array where each item is itself a key-value pair
+Next, we will connect all of the pieces together.
+
+5.4 Showing a List of Articles
+
+
