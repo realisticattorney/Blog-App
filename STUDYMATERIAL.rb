@@ -57,4 +57,6 @@ Rails.application.routes.draw do
 
  "mapping" in programming means taking several things and then somehow associating each of them with another thing.
  in this case taking /articles and associating each item in articles with index on ArticlesController
+
+   $ bin/rails generate controller Articles index --skip-routes #it creates the controller ArticlesController (convention over configuration)
    
