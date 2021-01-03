@@ -1,7 +1,7 @@
 # Blog-App
 # README
 
-Follow the steps of the guide
+Follow the steps of the guide.
 
 Things you may want to cover:
 
